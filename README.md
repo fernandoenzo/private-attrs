@@ -58,7 +58,7 @@ MyClass = MyClass()  # override the function definition
 ```
 As you can see, we first need to define the class inside a function. Outside that class, but inside the function scope, we instantiate a `PrivateAttrs` object.  
 
-Now, inside the `MyClass`, if we plan to have private instance attributes, and not just static ones, it's mandatory to register, in the `__init__()` method, the instance by calling the
+Now, inside `MyClass`, if we plan to have private instance attributes, and not just static ones, it's mandatory to register, in the `__init__()` method, the instance by calling the
  `register_instance()` function.
 
 Finally we return `MyClass` and we override the function definition.
@@ -123,11 +123,11 @@ def Person():
     p = PrivateAttrs(proxy=True)
 
     class Person:
-        def __init__(self, name, ssn):
+        def __init__(self, name, social_security_number):
             p.register_instance(self)
             self.name = name
             p.cell_phones = p.manager.list()
-            p.ssn = ssn
+            p.ssn = social_security_number
 
         @property
         def ssn(self):
@@ -163,7 +163,7 @@ def Person():
 Person = Person()
 ```
 
-By doing this, all the private attributes that we store are automatically availables in all processes, and you can modify them from anyone.
+By doing this, all the private attributes that we store are automatically available in all processes, and you can modify them from anyone.
 
 Pay particular attention to certain specific attributes that need to be instantiated using the `Manager` class, such as lists or dictionaries. Fortunately, there is an attached manager object in
  the `PrivateAttrs` class to simplify life for the programmer.
@@ -179,11 +179,11 @@ and a setter for each one. So the former `Person` class would look like this:
 
 ```python
 class Person:
-    def __init__(self, name, ssn):
+    def __init__(self, name, social_security_number):
         p.register_instance(self)
         p.name = name
         p.cell_phones = p.manager.list()
-        p.ssn = ssn
+        p.ssn = social_security_number
 
     @property
     def name(self):
@@ -229,4 +229,4 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ![PyPI - License](https://img.shields.io/pypi/l/private-attrs)
 
-[GNU General Public License v3 or later (GPLv3+)](https://choosealicense.com/licenses/gpl-3.0/)
+This library is licensed under the [GNU General Public License v3 or later (GPLv3+)](https://choosealicense.com/licenses/gpl-3.0/)

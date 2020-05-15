@@ -25,8 +25,9 @@ project_urls = {
     'Source': 'https://github.com/fernandoenzo/private-attrs/',
 }
 
-packages = find_packages()
+packages = find_packages(exclude=("tests",))
 py_modules = ['private_attrs']
+test_suite = 'tests'
 
 license = 'GPLv3+'
 
@@ -64,6 +65,7 @@ setuptools.setup(
     project_urls=project_urls,
     py_modules=py_modules,
     python_requires=python_requires,
+    test_suite=test_suite,
     url=url,
     version=version,
     zip_safe=zip_safe,
