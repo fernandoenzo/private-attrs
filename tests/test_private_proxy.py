@@ -27,16 +27,19 @@ class TestPrivate(TestCase):
 
     def test_person_proxy_with_non_shared_attribute(self):
         '''
-        We see here that there is no way to modify a public simple 'str' attribute like 'name' if the instance is handled as a proxy.
+        We see here that there is no way to modify a public simple 'str' attribute like 'name' if the instance
+        is handled as a proxy.
         '''
         m = Manager()
         p1 = PersonProxy(name='John', surname='Doe', social_security_number=123)
         ls = m.list((p1,))
         p1_ls, = ls
         self.assertEqual(p1.name, p1_ls.name)
-        self.assertNotEqual(id(p1_ls), id(ls[0]))  # Two different objects, but they should be the same. It's because of the existence of a non-shared attribute.
+        # Two different objects, but they should be the same. It's because of the existence of a non-shared attribute.
+        self.assertNotEqual(id(p1_ls), id(ls[0]))
         p1.name = 'Harry'
-        p1_ls.name = 'James'  # This 'name' attribute has nothing to do with p1.name. They are completely independet one from each other.
+        # This 'name' attribute has nothing to do with p1.name. They are completely independet of each other.
+        p1_ls.name = 'James'
         ls[0].name = 'Sirius'  # This line does nothing. The name cannot be changed.
         self.assertEqual(p1.name, 'Harry')
         self.assertEqual(p1_ls.name, 'James')
@@ -45,7 +48,8 @@ class TestPrivate(TestCase):
 
     def test_person_proxy_with_shared_attribute(self):
         '''
-        Unlike the previous test, here we see that we can change the value of a simple 'int' private attribute, even if the instance is handled as a proxy.
+        Unlike the previous test, here we see that we can change the value of a simple 'int' private attribute, even if the
+        instance is handled as a proxy.
         '''
         m = Manager()
         p1 = PersonProxy(name='John', surname='Doe', social_security_number=123)
@@ -59,7 +63,8 @@ class TestPrivate(TestCase):
 
     def test_person_proxy_list(self):
         '''
-        Here we see that we can modify a 'list' attribute (regardless of whether it's public or private) as long as it has been created with a manager.
+        Here we see that we can modify a 'list' attribute (regardless of whether it's public or private) as long as it has
+        been created with a manager.
         '''
         m = Manager()
         p1 = PersonProxy(name='John', surname='Doe', social_security_number=123)
@@ -70,7 +75,10 @@ class TestPrivate(TestCase):
         self.assertTrue(674123 in p1.cell_phones)  # We p1 again and now we see that its cell phones list is no longer empty
 
     def test_person_proxy_with_private_static_attrs(self):
-        # Since 'surname' is a static attribute, it's shared between all instances, even if those instances are being handled as proxies.
+        '''
+        Since 'surname' is a static attribute, it's shared between all instances, even if those instances are being handled
+        as proxies.
+        '''
         m = Manager()
         p1 = PersonProxy(name='John', surname='Doe', social_security_number=123)
         p2 = PersonProxy(name='Alice', surname='Jackson', social_security_number=456)

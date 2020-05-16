@@ -7,10 +7,11 @@
 
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/fernandoenzo/private-attrs)
 ![GitHub last commit](https://img.shields.io/github/last-commit/fernandoenzo/private-attrs)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/fernandoenzo/private-attrs/tests?label=tests)
 ![Maintenance](https://img.shields.io/maintenance/yes/2020)
 
-This little library, consisting of a single module, provides support for easy addition of **truly private attributes** inside classes, which are totally unreachable from outside the class
- definition, **as in C++ private clause**
+This little library, consisting of a single module, provides support for easy addition of **truly private attributes**
+ inside classes, which are totally unreachable from outside the class definition, **as in C++ private clause**
 
 ## Table of contents
 
@@ -56,10 +57,11 @@ def MyClass():
 
 MyClass = MyClass()  # override the function definition
 ```
-As you can see, we first need to define the class inside a function. Outside that class, but inside the function scope, we instantiate a `PrivateAttrs` object.  
+As you can see, we first need to define the class inside a function. Outside that class, but inside the function scope, we
+ instantiate a `PrivateAttrs` object.  
 
-Now, inside `MyClass`, if we plan to have private instance attributes, and not just static ones, it's mandatory to register, in the `__init__()` method, the instance by calling the
- `register_instance()` function.
+Now, inside `MyClass`, if we plan to have private instance attributes, and not just static ones, it's mandatory to
+ register, in the `__init__()` method, the instance by calling the `register_instance()` function.
 
 Finally we return `MyClass` and we override the function definition.
 - - -
@@ -102,16 +104,19 @@ def Person():
 
 Person = Person()
 ```
-Although a person can change their name, surname or even their sex, it's really unlikely (not to say impossible) for someone to change their social security number (SSN).
+Although a person can change their name, surname or even their sex, it's really unlikely (not to say impossible) for someone
+ to change their social security number (SSN).
 
-That's why we store the SSN as a private attribute, safe, unmodifiable, and we can rely on it to compare whether two people are the same person.
+That's why we store the SSN as a private attribute, safe, unmodifiable, and we can rely on it to compare whether two people
+ are the same person.
 - - -
 
 
 #### An example with proxy=True
 
-If we are working with the Python `multiprocessing` library and we want to create a class with private attributes that are accessible and modifiable from different running processes (we already
-know that, unlike threads, processes don't share memory space), we need to instantiate the `PrivateAttrs` object with the argument `proxy = True`.  
+If we are working with the Python `multiprocessing` library and we want to create a class with private attributes that are
+ accessible and modifiable from different running processes (we already know that, unlike threads, processes don't share
+  memory space), we need to instantiate the `PrivateAttrs` object with the argument `proxy = True`.  
 
 Let's see an example:
 
@@ -163,19 +168,23 @@ def Person():
 Person = Person()
 ```
 
-By doing this, all the private attributes that we store are automatically available in all processes, and you can modify them from anyone.
+By doing this, all the private attributes that we store are automatically available in all processes, and you can modify
+ them from anyone.
 
-Pay particular attention to certain specific attributes that need to be instantiated using the `Manager` class, such as lists or dictionaries. Fortunately, there is an attached manager object in
- the `PrivateAttrs` class to simplify life for the programmer.
+Pay particular attention to certain specific attributes that need to be instantiated using the `Manager` class, such as
+ lists or dictionaries. Fortunately, there is an attached manager object in the `PrivateAttrs` class to simplify life for
+  the programmer.
  
-Also be aware of the need to define `__getstate__()` and `__setstate__()` magic methods as you see them so the class can be correctly
-serialized and deserialized with all its private attributes when shared between processes.
+Also be aware of the need to define `__getstate__()` and `__setstate__()` magic methods as you see them so the class can be
+ correctly serialized and deserialized with all its private attributes when shared between processes.
 
-You should know that, the way we wrote this `Person` class, it's impossible for other processes to modify the public `name` attribute and make that change visible for the rest.
-This is because this attribute has not been instantiated with `Manager.Value()` nor inside a `Manager.Namespace()` or similar.
+You should know that, the way we wrote this `Person` class, it's impossible for other processes to modify the public 
+ `name` attribute and make that change visible for the rest. This is because this attribute has not been instantiated with
+  `Manager.Value()` nor inside a `Manager.Namespace()` or similar.
 
-One possible workaround if you don't want to use the mentioned methods for storing shared simple attributes like `str` or `int` would be to make them private and then make a getter (`@property`)
-and a setter for each one. So the former `Person` class would look like this:
+One possible workaround if you don't want to use the mentioned methods for storing shared simple attributes like `str` or
+ `int` would be to make them private and then make a getter (`@property`) and a setter for each one. So the former
+  `Person` class would look like this:
 
 ```python
 class Person:
@@ -229,4 +238,5 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ![PyPI - License](https://img.shields.io/pypi/l/private-attrs)
 
-This library is licensed under the [GNU General Public License v3 or later (GPLv3+)](https://choosealicense.com/licenses/gpl-3.0/)
+This library is licensed under the
+ [GNU General Public License v3 or later (GPLv3+)](https://choosealicense.com/licenses/gpl-3.0/)

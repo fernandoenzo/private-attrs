@@ -45,8 +45,9 @@ def PrivateAttrs(proxy=False):
         @staticmethod
         def register_instance(instance: object) -> None:
             '''
-            We need to register the instance in the PrivateAttrs object before starting storing our own attributes. This method must be called in the class __init__()
-            method, and only once. It will create an empty dictionary to store the private attrs of the instance.
+            We need to register the instance in the PrivateAttrs object before starting storing our own attributes. This
+            method must be called in the class __init__() method, and only once. It will create an empty dictionary
+            to store the private attrs of the instance.
             :param instance: The object instance.
             '''
             if private_attrs.get(id(instance)) is None:
@@ -58,7 +59,8 @@ def PrivateAttrs(proxy=False):
         @staticmethod
         def delete(instance: object) -> None:
             '''
-            Call this method inside, and only inside, the __del__() method of your custom class to avoid really unlikely but possible references problems.
+            Call this method inside, and only inside, the __del__() method of your custom class to avoid
+            really unlikely but possible references problems.
             :param instance: The object instance.
             '''
             # Needs to be in a try-except block because of unexpected errors
@@ -73,7 +75,8 @@ def PrivateAttrs(proxy=False):
             Retrieve a private attribute from an object instance.
             :param name: Name of the attribute.
             :param instance: The object instance.
-            :param exception: Whether this method should raise an AttributeError or not if the attribute does not exist. True by default.
+            :param exception: Whether this method should raise an AttributeError or not if the attribute does not exist.
+            True by default.
             :param default: Default value to return if 'exception' is False and the attribute does not exist. None by default.
             '''
             try:
@@ -110,7 +113,8 @@ def PrivateAttrs(proxy=False):
         @staticmethod
         def del_private_attr(name: str, instance: object) -> None:
             '''
-            Remove a private attribute from an object instance. This method always returns None, even if the attribute doesn't exist.
+            Remove a private attribute from an object instance.
+            This method always returns None, even if the attribute doesn't exist.
             :param name: Name of the attribute to remove.
             :param instance: The object instance.
             :return: None
@@ -129,7 +133,8 @@ def PrivateAttrs(proxy=False):
             '''
             Retrieve a private static attribute from a class.
             :param name: Name of the static attribute.
-            :param exception: Whether this method should raise an AttributeError or not if the attribute does not exist. True by default.
+            :param exception: Whether this method should raise an AttributeError or not if the attribute does not exist.
+            True by default.
             :param default: Default value to return if 'exception' is False and the attribute does not exist. None by default.
             '''
             try:
@@ -152,7 +157,8 @@ def PrivateAttrs(proxy=False):
         @staticmethod
         def del_static_private_attr(name: str) -> None:
             '''
-            Remove a private static attribute from a class. This method always returns None, even if the attribute doesn't exist.
+            Remove a private static attribute from a class.
+            This method always returns None, even if the attribute doesn't exist.
             :param name: Name of the static attribute to remove.
             '''
             static_private_attrs.pop(name, None)

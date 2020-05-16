@@ -7,10 +7,10 @@ from setuptools import find_packages
 name = 'private-attrs'
 
 # https://www.python.org/dev/peps/pep-0440/#version-scheme
-version = '1.0.0rc1.dev2'
+version = '1.0.0rc1.dev3'
 
-description = "This module provides support for easy addition of private attributes inside your custom objects, which are totally unreachable from outside the class definition, " \
-              "as in C++ 'private' clause."
+description = "This module provides support for easy addition of private attributes inside your custom objects, " \
+              "which are totally unreachable from outside the class definition, as in C++ 'private' clause."
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
@@ -40,8 +40,6 @@ python_requires = '>=3.7'
 # https://pypi.org/classifiers/
 classifiers = [
     'Development Status :: 5 - Production/Stable',
-    'Environment :: Console',
-    'Intended Audience :: End Users/Desktop',
     'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
     'Operating System :: POSIX',
     'Programming Language :: Python :: 3 :: Only',

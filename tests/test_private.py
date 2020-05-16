@@ -14,7 +14,8 @@ class TestPrivate(TestCase):
         p3 = Person(name='James', surname='Potter', social_security_number=456)
         self.assertEqual(p1, p2)
         self.assertNotEqual(p1, p3)
-        self.assertRaises(AttributeError, p1.__setattr__, 'ssn', 456)  # We cannot change the value of 'ssn', since it's private and we only defined a getter for it.
+        # We cannot change the value of 'ssn' since it's private and we only have defined a getter for it.
+        self.assertRaises(AttributeError, p1.__setattr__, 'ssn', 456)
         self.assertEqual(p1.ssn, 123)
         self.assertEqual(p3.ssn, 456)
 
