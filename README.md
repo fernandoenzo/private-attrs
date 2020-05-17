@@ -11,7 +11,7 @@
 ![Maintenance](https://img.shields.io/maintenance/yes/2020)
 
 This little library, consisting of a single module, provides support for easy addition of **truly private attributes**
- inside classes, which are totally unreachable from outside the class definition, **as in C++ private clause**
+ inside classes, which are totally unreachable from outside the class definition, **as in C++ private clause**.
 
 ## Table of contents
 
