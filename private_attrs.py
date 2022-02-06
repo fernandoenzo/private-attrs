@@ -70,11 +70,11 @@ def PrivateAttrs(proxy=False):
                 pass
 
         @staticmethod
-        def get_private_attr(name: str, instance: object, exception: bool = True, default: Any = None) -> Any:
+        def get_private_attr(instance: object, name: str, exception: bool = True, default: Any = None) -> Any:
             '''
             Retrieve a private attribute from an object instance.
-            :param name: Name of the attribute.
             :param instance: The object instance.
+            :param name: Name of the attribute.
             :param exception: Whether this method should raise an AttributeError or not if the attribute does not exist.
             True by default.
             :param default: Default value to return if 'exception' is False and the attribute does not exist. None by default.
@@ -90,16 +90,15 @@ def PrivateAttrs(proxy=False):
             if item.endswith('_static'):
                 return self.get_static_private_attr(item)
             instance = get_instance()
-            return self.get_private_attr(name=item, instance=instance)
+            return self.get_private_attr(instance=instance, name=item)
 
         @staticmethod
-        def set_private_attr(name: str, value: Any, instance: object) -> None:
+        def set_private_attr(instance: object, name: str, value: Any) -> None:
             '''
             Create or modify, if already exists, a private attribute in a object instance.
+            :param instance: The object instance.
             :param name: Name of the attribute.
             :param value: Value of the attribute.
-            :param instance: The object instance.
-            :param return: None
             '''
             private_attrs[id(instance)][name] = value
 
@@ -108,15 +107,15 @@ def PrivateAttrs(proxy=False):
                 self.set_static_private_attr(name=key, value=value)
             else:
                 instance = get_instance()
-                self.set_private_attr(name=key, value=value, instance=instance)
+                self.set_private_attr(instance=instance, name=key, value=value)
 
         @staticmethod
-        def del_private_attr(name: str, instance: object) -> None:
+        def del_private_attr(instance: object, name: str) -> None:
             '''
             Remove a private attribute from an object instance.
             This method always returns None, even if the attribute doesn't exist.
-            :param name: Name of the attribute to remove.
             :param instance: The object instance.
+            :param name: Name of the attribute to remove.
             :return: None
             '''
             private_attrs[id(instance)].pop(name, None)
@@ -169,7 +168,7 @@ def PrivateAttrs(proxy=False):
             return uid, private, static_private_attrs
 
         @staticmethod
-        def setstate(state: Tuple[int, Dict[str, Any], Dict[str, Any]], instance: object):
+        def setstate(instance: object, state: Tuple[int, Dict[str, Any], Dict[str, Any]]):
             uid, private, static = state
             private_attrs[id(instance)] = private_attrs[uid] if uid in private_attrs.keys() else private
             for key in static.keys():

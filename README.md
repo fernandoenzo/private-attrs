@@ -20,6 +20,7 @@ This little library, consisting of a single module, provides support for easy ad
   * [Usage](#usage)
       * [A simple example](#a-simple-example)
       * [An example with proxy=True](#an-example-with-proxytrue)
+  * [A word about compiling](#a-word-about-compiling)
   * [Contributing](#contributing)
   * [License](#license)
 <!--te-->
@@ -225,9 +226,44 @@ class Person:
         return state
 
     def __setstate__(self, state):
-        private = state.pop('private', self)
-        p.setstate(private)
+        private = state.pop('private')
+        p.setstate(self, private)
         self.__dict__ = state
+```
+
+## A word about compiling
+
+If you plan to compile your program or library using a tool like Cython, Nuitka or similar, you should know that
+ private-attrs uses the Python `inspect` module to provide the developer with a friendly interface, which does not
+ behave as usual when the program is compiled to C. All you have to do to avoid compilation problems is to use the
+ explicit private attribute getter and setter instead of the implicit declarations, only for non-static private attributes.
+
+For example, replace this:
+
+```python
+class Person:
+    
+    @property
+    def name(self):
+        return p.name
+
+    @name.setter
+    def name(self, name):
+        p.name = name
+```
+
+For this
+
+```python
+class Person:
+    
+    @property
+    def name(self):
+        return p.get_private_attr(self, 'name')
+
+    @name.setter
+    def name(self, name):
+        p.set_private_attr(self, 'name', name)
 ```
 
 ## Contributing

@@ -7,7 +7,7 @@ from setuptools import find_packages
 name = 'private-attrs'
 
 # https://www.python.org/dev/peps/pep-0440/#version-scheme
-version = '1.0.0'
+version = '1.0.1'
 
 description = "This module provides support for easy addition of private attributes inside your custom objects, " \
               "which are totally unreachable from outside the class definition, as in C++ 'private' clause."
@@ -46,6 +46,8 @@ classifiers = [
     'Programming Language :: Python :: 3 :: Only',
     'Programming Language :: Python :: 3.7',
     'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
     'Topic :: Software Development :: Libraries :: Python Modules',
 ]
 
