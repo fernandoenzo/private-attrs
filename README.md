@@ -8,7 +8,7 @@
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/fernandoenzo/private-attrs)
 [![GitHub last commit](https://img.shields.io/github/last-commit/fernandoenzo/private-attrs)](https://github.com/fernandoenzo/private-attrs)
 [![Build Status](https://img.shields.io/travis/com/fernandoenzo/private-attrs?label=tests)](https://travis-ci.com/fernandoenzo/private-attrs)
-![Maintenance](https://img.shields.io/maintenance/yes/2020)
+![Maintenance](https://img.shields.io/maintenance/yes/2022)
 
 This little library, consisting of a single module, provides support for easy addition of **truly private attributes**
  inside classes, which are totally unreachable from outside the class definition, **as in C++ private clause**.
